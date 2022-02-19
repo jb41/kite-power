@@ -1,5 +1,5 @@
-#include "../../Dynamics/dynamics_2d_cartesian.h"
-#include "../../Dynamics/winds.h"
+#include "dynamics_2d_cartesian.h"
+#include "winds.h"
 #include "sarsa_alpha_vrel_angle.h"
 
 double reward_dt = h*decision_time;
@@ -35,12 +35,12 @@ int main(int argc, char *argv[]){
 
     // ======== DYNAMICS VARIABLES =======
 
-    // vettori moto kite dall'origine fissa (x, z)
+    // kite motion vectors with fixed origin (x, z)
     double *rk = (double*) malloc(dim * sizeof(double)); 
     double *vk = (double*) malloc(dim * sizeof(double)); 
     double *ak = (double*) malloc(dim * sizeof(double)); 
 
-    // vettori moto block dall'origine fissa (x, z)
+    // motion block vectors with fixed origin (x, z)
     double *r_block = (double*) malloc(dim * sizeof(double));
     double *v_block = (double*) malloc(dim * sizeof(double));
     double *a_block = (double*) malloc(dim * sizeof(double));
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]){
     double W[dim] = {0, 0};
     int et_val = 0;
 
-    //double lr = 1.0; // adaptive learning rate
+    double lr = 1.0; // adaptive learning rate
     double vrel_x, vrel_z;
     double vrel_angle;
 

@@ -2,6 +2,7 @@
     "files.associations": {
         "dynamics_3d_cartesian_houska.h": "c",
         "dynamics_3d_cartesian.h": "c",
-        "random": "c"
+        "random": "c",
+        "dynamics_2d_cartesian.h": "c"
     }
 }
