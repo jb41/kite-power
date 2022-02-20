@@ -11,8 +11,8 @@
 
 #define PENALTY -300.0
 
-#define n_actions 3 // 0 diminuisco alpha, 1 rimango, 2 aumento
-#define n_angles 30 //18
+#define n_actions 3 // 0 decrease alpha, 1 stay, 2 increase :) // 0 diminuisco alpha, 1 rimango, 2 aumento
+#define n_angles 30 // 18
 
 #define decision_time 1000
 
@@ -25,7 +25,7 @@
 #define n_alphas 15
 #endif
 
-double Alpha = 0.5; // ordine di grandezza=h/tempo_episodio_in_sec(al minimo caduta)
+double Alpha = 0.5; // order of magnitude = h / time_episode_in_sec (at minimum fall)
 double epsilon = 0.05;
 
 double angles[n_angles+1] = {-4, -3.5, -3.2, -3.1, -3.0, -2.9, -2.7, -2.4, -2.1, -1.8, -1.5, -1.2, -0.9, -0.6, \
@@ -293,7 +293,7 @@ int select_alpha_action(double epsilon, double * Q, int s_alpha,int s_vrel_mod){
       #ifdef DEBUGSARSA
       printf("   Q[(s_mu+%d-1)] = %f\n", i, Q[(s_alpha+i-1)]);
       #endif
-      // io sono in Q[s_alpha*n_actions] 
+      // I'm in Q [s_alpha * n_actions]
       if (Q[s_vrel_mod*n_alphas*n_actions + s_alpha*n_actions + i] > Q[s_vrel_mod*n_alphas*n_actions + s_alpha*n_actions + a1]) { 
         a1 = i;
       }
