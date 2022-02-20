@@ -32,9 +32,9 @@ void streamfunction2d(double *rk, double *W){ // kp kiteposition in (x,z)
 
 void streamfunction2d_hard(double *rk, double *W){ // kp kiteposition in (x,z)
 
-    W[0] = 0.5*k_wind*rk[1]*(2*epsilon_wind_hard*sin(PI*rk[0]/Lx)*sin(PI*rk[1]/Ly) + \
-        epsilon_wind_hard*PI*rk[1]/Ly*sin(PI*rk[0]/Lx)*cos(PI*rk[1]/Ly) + 2);
-    W[1] = -k_wind*epsilon_wind_hard*PI*rk[1]*rk[1]/(2*Lx)*cos(PI*rk[0]/Lx)*sin(PI*rk[1]/Ly);
+    W[0] = 0.5 * k_wind * rk[1] * (2 * epsilon_wind_hard * sin(PI * rk[0] / Lx) * sin(PI * rk[1] / Ly) + \
+                                       epsilon_wind_hard * sin(PI * rk[0] / Lx) * cos(PI * rk[1] / Ly) + 2) * PI * rk[1] / Ly;
+    W[1] = - k_wind * epsilon_wind_hard*PI*rk[1]*rk[1]/(2*Lx)*cos(PI*rk[0]/Lx)*sin(PI*rk[1]/Ly);
 
 }
 

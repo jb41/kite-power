@@ -84,7 +84,7 @@ void integration_trajectory(double * rk, double * vk, double * ak, // Kite varia
     a_diff[1] = ak[1] - a_block[1];
 
     *theta = atan2(r_diff[1], r_diff[0]);
-    *dtheta = 1/(1+r_diff[1]/r_diff[0])*(v_diff[1]*r_diff[0] - r_diff[1]*v_diff[0])/(r_diff[0]*r_diff[0]);
+    *dtheta = 1 / (1 + r_diff[1] / r_diff[0] ) * ( v_diff[1] * r_diff[0] - r_diff[1] * v_diff[0]) / (r_diff[0] * r_diff[0]);
                         
     va[0] = vk[0] - W[0];              // Apparent velocity on x
     va[1] = vk[1] - W[1];              // Apparent velocity on z
@@ -130,6 +130,12 @@ void integration_trajectory(double * rk, double * vk, double * ak, // Kite varia
     F_aer[0] = L[0] + D[0];
     F_aer[1] = L[1] + D[1];
 
+    /*
+     *
+     *  ENVIRONMENT FORCERS, VELOCITIES, TENSION CALCULATION
+     *
+     */
+    
     // ===================== CASE 1) BLOCK NOT MOVING ( |v-block| < 10E-6 ) ==================
 
     if ( fabs(v_block[0]) < V_THRESHOLD ){ 
@@ -145,6 +151,12 @@ void integration_trajectory(double * rk, double * vk, double * ak, // Kite varia
 
         T1 = T1/denom1;
 
+        /*
+         *
+         * CENTER OF PAGE 44 IN THE PAPER
+         * 
+         */
+        
         // |Mg| < |Tz|
 
         denom2 = R*(m+m_block)/(m*m_block)

@@ -7,3 +7,5 @@
 .DS_Store
 .vscode/launch.json
 .vscode/tasks.json
+debug2d.csv
+cout_epsilon02_8.csv

@@ -178,7 +178,7 @@ int main(int argc, char *argv[]){
 
             //x_block_seq[it] = r_block[0];
 
-            if ((episode%save_matrix_step == 0 || episode == learning_episodes-1) && it%decision_time == 0){
+            if ((episode % save_matrix_step == 0 || episode == learning_episodes - 1) && it % decision_time == 0){
 
                 fprintf(out, "%d,%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d,%d,%f,%f,%f,%f\n", episode, it, rk[0], rk[1], 
                     r_block[0], r_block[1], theta, vtheta, W[0], W[1], v_block[0], vrel_x, vrel_z, \
@@ -234,6 +234,12 @@ int main(int argc, char *argv[]){
                 break;
             }*/
 
+            /*
+             *
+             * EPISODE IS DONE ( = TRUE)
+             * 
+             */
+
             if (rk[1] <= 0.) {
                 
                 fprintf(rew, "%d,%f,%f,%d,%f,%f\n", episode, epsilon, Alpha, it, tot_reward, PENALTY);
@@ -277,11 +283,25 @@ int main(int argc, char *argv[]){
 
                 // UPDATE Q MATRIX
 
+                /*
+                 *
+                 * EPISODE IS DONE ( = TRUE)
+                 * 
+                 */
+
                 if (it == max_steps){
 
                     Q[s_vrel_angle*n_alphas*n_actions + s_alpha*n_actions + a_alpha] += Alpha*(reward
                         - Q[s_vrel_angle*n_alphas*n_actions + s_alpha*n_actions + a_alpha]);
                 }
+
+                /*
+                 *
+                 * EPISODE IS NOT DONE ( = FALSE)
+                 * ACTION PICKING IS HERE
+                 * 
+                 */
+
                 else {
 
                     // FIND STATE S1 USING ACTION A
@@ -311,6 +331,12 @@ int main(int argc, char *argv[]){
                     Q[s_vrel_angle*n_alphas*n_actions + s_alpha*n_actions + a_alpha] += Alpha*(reward  
                         + Gamma*Q[s_vrel_angle1*n_alphas*n_actions + s_alpha1*n_actions + a_alpha1]
                         - Q[s_vrel_angle*n_alphas*n_actions + s_alpha*n_actions + a_alpha]);  
+
+                    /*
+                     *
+                     * GO TO NEXT STATE WITH SELECTED ACTION
+                     * 
+                     */
 
                     // MOVE ON: S = S1, A = A1
                     s_alpha = s_alpha1;
