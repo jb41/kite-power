@@ -9,6 +9,12 @@
 
 //#define DEBUG
 
+/*
+ *
+ * THIS FILE IS KITE_SIM
+ * 
+ */
+
 double Va_mod;
 double va[2];
 double L[2];
